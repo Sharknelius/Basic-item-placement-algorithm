@@ -4,7 +4,7 @@ from game import Game
 
 # Randomization mapping
 def generate_item_placement(game: Game, resources: set[str]) -> bool:
-    print(f"\n{"---" * 5} Brute-force algorithm {"---" * 5}")
+    print(f"{"---" * 5} Brute-force Algorithm {"---" * 5}")
 
     # n^r * (n + m)
     max_iterations = len(game.nodes) ** len(resources) * (len(game.nodes) + len(game.edges))
@@ -16,7 +16,7 @@ def generate_item_placement(game: Game, resources: set[str]) -> bool:
         # Randomly map resources to nodes
         rand_nodes = random.sample(sorted(game.nodes), len(resources)) # Get random nodes
         for item, node in zip(resources, rand_nodes):
-                print(f"\nPlacing item {item} in node {node}")
+                print(f"Placing item {item} in node {node}")
                 game.place_item(node, item)
         
         # Reset inventory and Vreach after placement
@@ -31,8 +31,9 @@ def generate_item_placement(game: Game, resources: set[str]) -> bool:
         if game.end in vreach:
             print(f"\nEnd node '{game.end}' is reachable, game is finishable")
             return True
+        print("Game is not finishable with these placements, trying again...\n")
 
-    print(f"\nCould not place all required items.")
+    print(f"\nCould not place all required items or game cannot be solved.")
     return False
 
 # Update these values to test different game structures and resource sets
