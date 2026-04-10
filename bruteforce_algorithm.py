@@ -3,10 +3,7 @@ import random
 from game import Game
 
 # Randomization mapping
-def generate_item_placement(game: Game, resources: set[str], seed: int | None = None) -> bool:
-    if seed is not None:
-        random.seed(seed)
-
+def generate_item_placement(game: Game, resources: set[str]) -> bool:
     print(f"\n{"---" * 5} Brute-force algorithm {"---" * 5}")
 
     # n^r * (n + m)
@@ -19,6 +16,7 @@ def generate_item_placement(game: Game, resources: set[str], seed: int | None = 
         # Randomly map resources to nodes
         rand_nodes = random.sample(sorted(game.nodes), len(resources)) # Get random nodes
         for item, node in zip(resources, rand_nodes):
+                print(f"\nPlacing item {item} in node {node}")
                 game.place_item(node, item)
         
         # Reset inventory and Vreach after placement
@@ -44,7 +42,7 @@ def create_game1() -> tuple[Game, set[str]]:
     for node in ['A', 'B', 'C', 'D', 'E', 'F', 'G']:
         game.add_node(node)
 
-    resources = {'key', 'torch', 'key'}
+    resources = {'key', 'torch'}
 
     game.add_edge('A', 'B')
     game.add_edge('B', 'C', requires='key')   # Need 'key' to go B -> C
@@ -81,7 +79,7 @@ if __name__ == '__main__':
     print(game)
     print(f"\nResource set R: {sorted(resources)}")
 
-    success = generate_item_placement(game, resources, seed=42)
+    success = generate_item_placement(game, resources)
 
     print(f"\n{"---" * 5} Final Game State {"---" * 5}")
     print(game)
