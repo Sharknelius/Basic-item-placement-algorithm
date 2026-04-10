@@ -28,7 +28,7 @@ def generate_item_placement(game: Game, resources: set[str], seed: int | None = 
         inventory = game.collect_items_from(vreach)
         vreach = game.compute_reachable(inventory)
 
-        print(f"\nIteration {iteration}\nVreach={sorted(vreach)}\ninventory={sorted(inventory)}")
+        print(f"\nIteration {iteration+1}\nVreach={sorted(vreach)}\ninventory={sorted(inventory)}")
 
         if game.end in vreach:
             print(f"\nEnd node '{game.end}' is reachable, game is finishable")
