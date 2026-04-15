@@ -15,8 +15,8 @@ def generate_item_placement(game: Game, resources: set[str]) -> bool:
     print(f"Initial Vreach: {sorted(vreach)}")
     print(f"Initial inventory: {sorted(inventory)}")
 
-    # (n + m) * r
-    max_iterations = (len(game.nodes) + len(game.edges)) * len(resources)
+    # |v| * |e|
+    max_iterations = len(game.nodes) * len(game.edges) * 5
     for iteration in range(max_iterations):
         if game.end in vreach:
             print(f"\nEnd node '{game.end}' is reachable, game is finishable")
